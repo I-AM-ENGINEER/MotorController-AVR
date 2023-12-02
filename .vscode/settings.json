@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "interrupt.h": "c",
+        "stdbool.h": "c",
+        "delay.h": "c",
+        "stdlib.h": "c",
+        "stdint.h": "c",
+        "eeprom.h": "c",
+        "string.h": "c",
+        "stdio.h": "c"
+    }
+}
