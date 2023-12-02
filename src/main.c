@@ -70,12 +70,12 @@ void lcd_putc(uint8_t data){
 	lcd_write(data); // Запись данных
 }
 
-void lcdSetCursor(uint8_t line, uint8_t columm){
+void lcd_set_cursor(uint8_t line, uint8_t columm){
 	uint8_t position = (line << 6) | (columm); // Установка позиции курсора
 	lcd_write_cmd(0x80 | position);
 }
 
-void lcdInit(void){
+void lcd_init(void){
 	// Последовательность иницаиализации из даташита
 	_delay_ms(20); // Задержка, что бы дисплей успел включиться
 	LCD_PORT = 0x03 | (LCD_PORT & 0xF0); // Записываем старшие 4 байта на шину
@@ -166,12 +166,14 @@ void kbrd_scan( void ){
 			case 2: PORTB &= ~0x01; break;
 			default: break;
 		}
+		// Если ничего не нажато, переход к следующему столбцу
 		switch (PINB & 0xE0){
 			case 0x60: i+=3;
 			case 0xA0: i+=3;
-			case 0xC0: break;
+			case 0xC0: break; 
 			default:   continue; break;
 		}
+		
 		if(i != last_key){
 			last_key = i;
 			btnPushedISR(*((const char*)but2char+i));
@@ -180,7 +182,6 @@ void kbrd_scan( void ){
 	}
 	last_key = -1;
 }
-
 
 ISR(TIMER0_COMPA_vect){
 	update_motor_state();
@@ -229,11 +230,11 @@ int main(void){
 
 	sei(); // Велючение прерываний
 	
-	lcdInit(); // Инициализация дисплея
+	lcd_init(); // Инициализация дисплея
 	
 	while (1){
 		// Вывод верхней строки
-		lcdSetCursor(0,0); // Установить курсор в начало
+		lcd_set_cursor(0,0); // Установить курсор в начало
 		lcd_puts("TARGET:");
 		print_value(target_speed);
 		lcd_write(' ');
@@ -244,7 +245,7 @@ int main(void){
 		else
 			lcd_puts("OFF");
 		// Вывод нижней строки
-		lcdSetCursor(1,0); // Установить курсор в начало 2 строки
+		lcd_set_cursor(1,0); // Установить курсор в начало 2 строки
 		lcd_puts("REAL:  ");
 		print_value(OCR1AL);
 		lcd_write(' ');

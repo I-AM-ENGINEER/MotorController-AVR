@@ -1,7 +1,12 @@
 Для задания:
-Собрать схему кодового замка на матричной клавиатуре (4x4) и составить программу закрытия или открытия электромеханического реле в зависимости от введенного кода. Для открытия замка должна быть предусмотрена комбинация последовательно нажатых кнопок. Реализовать режим смены комбинации после открытия замка, реализовать вывод цифр на дисплей.
+Собрать схему и составить программу управления скоростью мотора постоянного тока с помощью матричной клавиатуры (3х3). Скорость и направление вращения задается нажатием кнопок или их сочетанием. Мотор приводится в движение при помощи микросхемы L298 или аналогичной.
 
-Assemble a combination lock circuit on a matrix keyboard (4x4) and create a program for closing or opening an electromechanical relay depending on the entered code. To open the lock, a combination of sequentially pressed buttons must be provided. Implement a mode for changing the combination after opening the lock, implement the display of numbers on the display.
+Из особенностей - использован самый бомж МК (attiny2313), который для этой задачи вообще возможен (attiny13 ещё хуже, но там надо сдвиговые регистры прикрутить), и минимально возможная частота контроллера - 16 кГц
+
+For the task:
+Assemble a circuit and write a program to control the speed of a DC motor using a matrix keyboard (3x3). The speed and direction of rotation are set by pressing buttons or a combination of them. The motor is driven by an L298 chip or similar.
+
+Among the features - the most bum MK is used (attiny2313), which is generally possible for this task (attiny13 is even worse, but shift registers need to be screwed in there), and the minimum possible controller frequency is 16 kHz
 
 
 ![scheme](Scheme.png)
